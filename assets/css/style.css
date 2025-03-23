@@ -1,0 +1,25 @@
+
+body {
+  font-family: monospace;
+  margin: 0;
+  padding: 0;
+  background-color: #0f0f0f;
+  color: #e0e0e0;
+  background-image: url('/assets/img/bg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+header, footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: rgba(0,0,0,0.8);
+}
+a { color: #00ffff; text-decoration: none; }
+main {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: rgba(20, 20, 20, 0.9);
+  border-radius: 10px;
+}
