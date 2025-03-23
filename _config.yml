@@ -1,0 +1,11 @@
+title: NopNop0x90's Blog
+description: Personal writeups and exploits
+baseurl: "" 
+url: "https://NopNopx90.github.io"
+theme: minima 
+
+author:
+  name: NopNopx90
+  email: nopnopx90@gmail.com
+
+markdown: kramdown

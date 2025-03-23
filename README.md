@@ -9,5 +9,3 @@ This is a minimal, responsive Jekyll blog template for writeups and exploits.
 2. Enable GitHub Pages in repo settings (main branch)
 3. Done!
 
-## Customize Background
-Replace `/assets/img/bg.png` with any image you like.

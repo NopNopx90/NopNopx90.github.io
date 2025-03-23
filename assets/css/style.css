@@ -1,25 +1,130 @@
-
 body {
-  font-family: monospace;
   margin: 0;
-  padding: 0;
-  background-color: #0f0f0f;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
   color: #e0e0e0;
-  background-image: url('/assets/img/bg.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
 }
-header, footer {
+
+header {
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 20px;
   text-align: center;
-  padding: 1rem;
-  background-color: rgba(0,0,0,0.8);
+  border-bottom: 2px solid #444;
 }
-a { color: #00ffff; text-decoration: none; }
+
+header h1 {
+  font-family: 'Fira Code', monospace;
+  font-size: 2.5rem;
+  margin: 0;
+  color: #00ffe7;
+}
+
+.tagline {
+  font-size: 1rem;
+  color: #b0b0b0;
+  margin-top: 10px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #e0e0e0;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #00ffe7;
+}
+
 main {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 1rem;
-  background-color: rgba(20, 20, 20, 0.9);
-  border-radius: 10px;
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
+
+.hero {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #cccccc;
+}
+
+.latest-posts h2 {
+  font-size: 2rem;
+  border-bottom: 2px solid #00ffe7;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.post-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-left: 4px solid #00ffe7;
+  border-radius: 10px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.post-card h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+.post-card a {
+  color: #00ffe7;
+  text-decoration: none;
+}
+
+.post-card a:hover {
+  text-decoration: underline;
+}
+
+.post-date {
+  font-size: 0.9rem;
+  color: #aaaaaa;
+  margin-bottom: 10px;
+}
+
+.read-more {
+  display: inline-block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #00ffe7;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.85);
+  border-top: 2px solid #444;
+  margin-top: 40px;
+}
+
