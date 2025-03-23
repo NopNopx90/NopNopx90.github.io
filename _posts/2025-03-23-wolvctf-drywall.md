@@ -251,7 +251,7 @@ p.interactive()
 
 Running the exploit...
 
-![exploit screenshot](/assets/img/exploits/drywall.png)
+![exploit screenshot](/assets/images/exploits/drywall.png)
 
 Mission accomplished.
 
