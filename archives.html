@@ -1,0 +1,68 @@
+---
+layout: default
+title: Archives
+permalink: /archives
+---
+
+<div class="archives-header">
+  <h1>Archives</h1>
+  <p>Browse all writeups by category, date, or search</p>
+</div>
+
+<div class="tag-list">
+  <span class="tag active" data-tag="all">All</span>
+  {% assign tags = site.posts | map: "categories" | uniq | compact | sort %}
+  {% for tag in tags %}
+    <span class="tag" data-tag="{{ tag }}">{{ tag }}</span>
+  {% endfor %}
+</div>
+
+<div class="posts-list">
+  {% for post in site.posts %}
+    <div class="post-item" data-categories="{{ post.categories | join: ' ' | downcase }}">
+      <div class="post-content">
+        <div class="post-meta">
+          <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
+          {% if post.categories %}
+            <span class="tag">{{ post.categories | first }}</span>
+          {% endif %}
+          <span class="reading-time">{{ post.content | number_of_words | divided_by: 250 | plus: 1 }} min read</span>
+        </div>
+        <h2 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+        <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+        <a href="{{ post.url }}" class="read-more">Read More →</a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const tags = document.querySelectorAll('.tag');
+    const posts = document.querySelectorAll('.post-item');
+    
+    tags.forEach(tag => {
+      tag.addEventListener('click', function() {
+        const selectedTag = this.getAttribute('data-tag');
+        
+        // Update active tag
+        tags.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Filter posts
+        if (selectedTag === 'all') {
+          posts.forEach(post => post.style.display = 'block');
+        } else {
+          posts.forEach(post => {
+            const categories = post.getAttribute('data-categories');
+            if (categories && categories.includes(selectedTag.toLowerCase())) {
+              post.style.display = 'block';
+            } else {
+              post.style.display = 'none';
+            }
+          });
+        }
+      });
+    });
+  });
+</script>

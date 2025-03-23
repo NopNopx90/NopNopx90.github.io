@@ -1,11 +1,37 @@
 title: NopNop0x90's Blog
-description: Personal writeups and exploits
-baseurl: "" 
-url: "https://NopNopx90.github.io"
-theme: minima 
+description: Security research, CTF writeups, and hacking adventures
+url: https://nopnopx90.github.io
+baseurl: ""
 
-author:
-  name: NopNopx90
-  email: nopnopx90@gmail.com
-
+# Build settings
 markdown: kramdown
+highlighter: rouge
+permalink: /:year/:month/:day/:title/
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /writeups/:title/
+
+# Default front matter
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "NopNop0x90"
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - README.md

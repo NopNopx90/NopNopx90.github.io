@@ -1,24 +1,58 @@
 body {
   font-family: 'Inter', sans-serif;
   margin: 0;
-  background: url('/assets/images/background.jpeg') no-repeat center center fixed;
-  background-size: cover;
+  background: #1a1a1a;
   color: #e0e0e0;
   line-height: 1.6;
 }
 
-body::before {
+.banner {
+  background: url('/assets/images/background.jpeg') no-repeat center;
+  background-size: cover;
+  height: 300px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner::before {
   content: "";
-  position: fixed;
+  position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
   background: rgba(0, 0, 0, 0.7);
-  z-index: -1;
+}
+
+.banner-content {
+  position: relative;
+  text-align: center;
+  z-index: 1;
+}
+
+.banner h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.banner .tagline {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.2rem;
+  margin-top: 0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+header {
+  padding: 1rem 0;
+  border-bottom: 1px solid #333;
 }
 
 header, footer {
   text-align: center;
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.5);
 }
 
 h1, h2, h3 {
@@ -26,12 +60,14 @@ h1, h2, h3 {
 }
 
 a {
-  color: #90caf9;
+  color: #ff4b4b;
   text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 a:hover {
-  text-decoration: underline;
+  color: #ff7a7a;
+  text-decoration: none;
 }
 
 nav ul {
@@ -39,39 +75,177 @@ nav ul {
   padding: 0;
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
-.posts-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+nav ul li a {
+  font-family: 'Fira Code', monospace;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  position: relative;
+}
+
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: #ff4b4b;
+  transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+.posts-list {
   margin: 2rem 0;
 }
 
-.post-card {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 1rem;
+.post-item {
+  background: #222;
+  margin-bottom: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.post-content {
+  padding: 1.5rem;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.post-meta .date {
+  margin-right: 1rem;
+}
+
+.post-meta .tag {
+  background: #333;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.post-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.post-excerpt {
+  color: #bbb;
+  margin-bottom: 1rem;
+}
+
+.read-more {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 2rem 0;
+}
+
+.tag {
+  background: #333;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.tag:hover, .tag.active {
+  background: #ff4b4b;
 }
 
 pre {
-  background: #1e1e1e;
-  padding: 1rem;
-  border-radius: 5px;
+  background: #111;
+  padding: 1.5rem;
+  border-radius: 8px;
   overflow-x: auto;
   position: relative;
+  margin: 1.5rem 0;
+  font-family: 'Fira Code', monospace;
+}
+
+code {
+  font-family: 'Fira Code', monospace;
 }
 
 .copy-btn {
   position: absolute;
   top: 8px;
   right: 8px;
-  background: #90caf9;
+  background: #333;
+  color: #fff;
   border: none;
   padding: 0.3rem 0.6rem;
   cursor: pointer;
   border-radius: 3px;
   font-size: 0.8rem;
+  transition: background 0.3s ease;
+}
+
+.copy-btn:hover {
+  background: #ff4b4b;
+}
+
+footer {
+  margin-top: 3rem;
+  padding: 2rem 0;
+  font-size: 0.9rem;
+  color: #999;
+  border-top: 1px solid #333;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.pagination a, .pagination span {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #222;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.pagination a:hover, .pagination span.current {
+  background: #ff4b4b;
+}
+
+@media (max-width: 768px) {
+  .banner {
+    height: 200px;
+  }
+  
+  .banner h1 {
+    font-size: 1.8rem;
+  }
+  
+  .banner .tagline {
+    font-size: 1rem;
+  }
 }
