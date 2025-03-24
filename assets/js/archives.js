@@ -1,102 +1,51 @@
 document.addEventListener('DOMContentLoaded', function() {
-  const searchInput = document.getElementById('searchInput');
-  const sortSelect = document.getElementById('sortSelect');
-  const tags = document.querySelectorAll('.tag');
+  const tagButtons = document.querySelectorAll('.tag-list .tag');
   const posts = document.querySelectorAll('.post-item');
-  const noResults = document.getElementById('noResults');
+  const yearSections = document.querySelectorAll('.year-section');
   
-  let activeTag = 'all';
-  let searchQuery = '';
-  
-  // Filter function - handles both tag and search filtering
-  function filterPosts() {
-    let visibleCount = 0;
-    
-    posts.forEach(post => {
-      const categories = post.getAttribute('data-categories');
-      const title = post.getAttribute('data-title');
+  // Filter posts by category
+  tagButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      // Remove active class from all buttons
+      tagButtons.forEach(btn => btn.classList.remove('active'));
       
-      // Check if post matches current tag filter
-      const matchesTag = activeTag === 'all' || 
-                          (categories && categories.includes(activeTag));
-      
-      // Check if post matches search query
-      const matchesSearch = searchQuery === '' || 
-                            title.includes(searchQuery.toLowerCase());
-      
-      if (matchesTag && matchesSearch) {
-        post.style.display = 'block';
-        visibleCount++;
-      } else {
-        post.style.display = 'none';
-      }
-    });
-    
-    // Show "no results" message if needed
-    if (visibleCount === 0) {
-      noResults.style.display = 'block';
-    } else {
-      noResults.style.display = 'none';
-    }
-  }
-  
-  // Sort function
-  function sortPosts() {
-    const postsList = document.getElementById('archivesList');
-    const postsArray = Array.from(posts);
-    
-    postsArray.sort((a, b) => {
-      const sortType = sortSelect.value;
-      
-      if (sortType === 'newest') {
-        return b.getAttribute('data-date') - a.getAttribute('data-date');
-      } else if (sortType === 'oldest') {
-        return a.getAttribute('data-date') - b.getAttribute('data-date');
-      } else if (sortType === 'title') {
-        return a.getAttribute('data-title').localeCompare(b.getAttribute('data-title'));
-      }
-    });
-    
-    // Remove all posts and re-append in sorted order
-    postsArray.forEach(post => postsList.appendChild(post));
-    
-    // Re-apply filters after sorting
-    filterPosts();
-  }
-  
-  // Search input handler
-  searchInput.addEventListener('input', function() {
-    searchQuery = this.value.trim();
-    filterPosts();
-  });
-  
-  // Tag click handler
-  tags.forEach(tag => {
-    tag.addEventListener('click', function() {
-      activeTag = this.getAttribute('data-tag');
-      
-      // Update active tag styling
-      tags.forEach(t => t.classList.remove('active'));
+      // Add active class to clicked button
       this.classList.add('active');
       
-      filterPosts();
+      const category = this.getAttribute('data-category');
+      
+      // Filter posts
+      posts.forEach(post => {
+        if (category === 'all' || post.getAttribute('data-category') === category) {
+          post.style.display = 'flex';
+        } else {
+          post.style.display = 'none';
+        }
+      });
+      
+      // Check if year sections are empty and hide if needed
+      yearSections.forEach(section => {
+        const visiblePosts = section.querySelectorAll('.post-item[style="display: flex"]').length;
+        if (visiblePosts === 0) {
+          section.style.display = 'none';
+        } else {
+          section.style.display = 'block';
+        }
+      });
     });
   });
   
-  // Sort selection handler
-  sortSelect.addEventListener('change', sortPosts);
+  // Add animation to posts when they come into view
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
   
-  // Initial sort
-  sortPosts();
-  
-  // Add animation effects
   posts.forEach(post => {
-    post.addEventListener('mouseenter', function() {
-      this.classList.add('hover');
-    });
-    
-    post.addEventListener('mouseleave', function() {
-      this.classList.remove('hover');
-    });
+    observer.observe(post);
   });
 });
