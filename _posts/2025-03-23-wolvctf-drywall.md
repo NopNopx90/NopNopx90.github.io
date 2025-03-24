@@ -1,8 +1,9 @@
 ---
-layout: default
-title: DryWall – writeup 🧱🔨  from Wolvctf
-Category: Pwn
+layout: post
+title: "DryWall – writeup 🧱🔨 from Wolvctf"
 date: 2025-03-23
+categories: [Pwn]
+tags: [userland]
 ---
 
 ---
