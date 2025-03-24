@@ -60,7 +60,7 @@ a:hover {
 /* Banner/Header */
 .banner {
   background: url('/assets/images/background.jpeg') no-repeat center;
-  background-size: contain;
+  background-size: cover;
   height: 300px;
   position: relative;
   display: flex;
