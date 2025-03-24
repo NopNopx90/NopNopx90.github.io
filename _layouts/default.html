@@ -7,25 +7,38 @@
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="/assets/images/logo.png" type="image/png">
+  <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+  {% if page.noindex %}
+  <meta name="robots" content="noindex, nofollow">
+  {% endif %}
 </head>
-<body>
+<body class="dark">
   <div class="banner">
     <div class="banner-content">
-      <h1><a href="/">NopNop0x90's Blog</a></h1>
-      <p class="tagline">Pwn × Rev</p>
+      <h1><a href="/"><img src="/assets/images/logo.png" alt="Logo" class="logo">NopNop0x90's Blog</a></h1>
+      <p class="tagline">Web × Crypto × Pwn</p>
     </div>
   </div>
   
   <div class="container">
     <header>
-      <nav>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/archives.html">Archives</a></li>
-          <li><a href="/about.html">About</a></li>
-        </ul>
-      </nav>
+      <div class="header-logo-nav">
+        <nav>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/archives">Archives</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/feed.xml">RSS</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="header-right">
+        <button id="theme-toggle" title="Switch Theme">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+      </div>
     </header>
 
     <main>
@@ -33,10 +46,14 @@
     </main>
 
     <footer>
-      <p>&copy; 2025 NopNop0x90 | <a href="https://github.com/NopNopx90">GitHub</a></p>
+      <p>&copy; 2025 NopNop0x90 | <a href="https://github.com/NopNopx90">GitHub</a> | <a href="/feed.xml">RSS</a></p>
     </footer>
   </div>
 
   <script src="/assets/js/copy.js"></script>
+  <script src="/assets/js/theme-switcher.js"></script>
+  {% if page.url == "/archives" or page.url == "/archives/" %}
+  <script src="/assets/js/archives.js"></script>
+  {% endif %}
 </body>
 </html>

@@ -1,0 +1,27 @@
+---
+layout: default
+title: 404 - Page Not Found
+permalink: /404.html
+---
+
+<div class="error-page">
+  <div class="error-content">
+    <div class="error-code">404</div>
+    <h1>SEGMENTATION FAULT</h1>
+    <div class="error-details">
+      <pre><code>
+Program received signal SIGSEGV, Segmentation fault.
+0x0000000000401337 in ?? ()
+(gdb) bt
+#0  0x0000000000401337 in page_not_found ()
+#1  0x00000000deadbeef in memory_access ()
+#2  0x0000000000400000 in main ()
+      </code></pre>
+    </div>
+    <p>The page you were looking for has been moved, deleted, or probably never existed.</p>
+    <p>Let's get you back to somewhere safe...</p>
+    <div class="button-container">
+      <a href="/" class="glow-button">Return to Home</a>
+    </div>
+  </div>
+</div>

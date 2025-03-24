@@ -4,64 +4,71 @@ title: Archives
 permalink: /archives
 ---
 
-<div class="archives-header">
-  <h1>Archives</h1>
-  <p>Browse all writeups by category, date, or search</p>
-</div>
-
-<div class="tag-list">
-  <span class="tag active" data-tag="all">All</span>
-  {% assign tags = site.posts | map: "categories" | uniq | compact | sort %}
-  {% for tag in tags %}
-    <span class="tag" data-tag="{{ tag }}">{{ tag }}</span>
-  {% endfor %}
-</div>
-
-<div class="posts-list">
-  {% for post in site.posts %}
-    <div class="post-item" data-categories="{{ post.categories | join: ' ' | downcase }}">
-      <div class="post-content">
-        <div class="post-meta">
-          <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
-          {% if post.categories %}
-            <span class="tag">{{ post.categories | first }}</span>
-          {% endif %}
-          <span class="reading-time">{{ post.content | number_of_words | divided_by: 250 | plus: 1 }} min read</span>
-        </div>
-        <h2 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
-        <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
-        <a href="{{ post.url }}" class="read-more">Read More →</a>
-      </div>
+<section class="archives">
+  <div class="filters">
+    <h2>Filter by Category</h2>
+    <div class="tag-list">
+      <span class="tag active" data-category="all">All</span>
+      <span class="tag" data-category="pwn">PWN</span>
+      <span class="tag" data-category="reverse">REVERSE</span>
+      <span class="tag" data-category="web">WEB</span>
+      <span class="tag" data-category="crypto">CRYPTO</span>
+      <span class="tag" data-category="kernel">KERNEL</span>
+      <span class="tag" data-category="ctf">CTF</span>
     </div>
-  {% endfor %}
-</div>
+  </div>
+
+  <div class="years-container">
+    {% assign postsByYear = site.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
+    {% for year in postsByYear %}
+      <div class="year-section">
+        <h2 class="year-title">{{ year.name }}</h2>
+        <div class="posts-timeline">
+          {% for post in year.items %}
+            <div class="timeline-item post-item" data-category="{{ post.categories | first | downcase }}">
+              <div class="timeline-date">
+                <span class="date">{{ post.date | date: "%m-%d" }}</span>
+              </div>
+              <div class="timeline-content post-content">
+                <h3 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h3>
+                <div class="post-meta">
+                  {% if post.categories %}
+                    <span class="tag">{{ post.categories | first }}</span>
+                  {% endif %}
+                  <span class="reading-time">{{ post.content | number_of_words | divided_by: 250 | plus: 1 }} min read</span>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const tags = document.querySelectorAll('.tag');
+    const tagButtons = document.querySelectorAll('.tag-list .tag');
     const posts = document.querySelectorAll('.post-item');
     
-    tags.forEach(tag => {
-      tag.addEventListener('click', function() {
-        const selectedTag = this.getAttribute('data-tag');
+    tagButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // Remove active class from all buttons
+        tagButtons.forEach(btn => btn.classList.remove('active'));
         
-        // Update active tag
-        tags.forEach(t => t.classList.remove('active'));
+        // Add active class to clicked button
         this.classList.add('active');
         
+        const category = this.getAttribute('data-category');
+        
         // Filter posts
-        if (selectedTag === 'all') {
-          posts.forEach(post => post.style.display = 'block');
-        } else {
-          posts.forEach(post => {
-            const categories = post.getAttribute('data-categories');
-            if (categories && categories.includes(selectedTag.toLowerCase())) {
-              post.style.display = 'block';
-            } else {
-              post.style.display = 'none';
-            }
-          });
-        }
+        posts.forEach(post => {
+          if (category === 'all' || post.getAttribute('data-category') === category) {
+            post.style.display = 'flex';
+          } else {
+            post.style.display = 'none';
+          }
+        });
       });
     });
   });
