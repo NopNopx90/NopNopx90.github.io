@@ -1,9 +1,10 @@
 ---
-layout: post
+layout: default
 title: "DryWall – writeup 🧱🔨 from Wolvctf"
 date: 2025-03-23
-categories: [Pwn]
-tags: [userland]
+categories: [PWN]
+tags: [userland, pwn, binary-exploitation, ROP]
+description: "Detailed writeup of the Drywall challenge from WolvCTF 2025 covering ROP chain development and exploit mitigation bypass."
 ---
 
 ---
