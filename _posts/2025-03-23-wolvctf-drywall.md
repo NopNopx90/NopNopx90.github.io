@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: "DryWall – writeup 🧱🔨 from Wolvctf"
 date: 2025-03-23
 categories: [PWN]
