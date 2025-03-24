@@ -1,16 +1,16 @@
 :root {
   /* Dark theme (default) */
-  --bg-primary: #f8f8f8;
-  --bg-secondary: #ffffff;
-  --bg-tertiary: #e8e8e8;
-  --text-primary: #252525;
-  --text-secondary: #555;
-  --text-muted: #777;
-  --accent-color: #e83a3a;
-  --accent-hover: #c42f2f;
-  --border-color: #ddd;
-  --code-bg: #f2f2f2;
-  --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #222;
+  --bg-tertiary: #333;
+  --text-primary: #e0e0e0;
+  --text-secondary: #bbb;
+  --text-muted: #999;
+  --accent-color: #ff4b4b;
+  --accent-hover: #ff7a7a;
+  --border-color: #333;
+  --code-bg: #111;
+  --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   --header-height: 70px;
 }
 
