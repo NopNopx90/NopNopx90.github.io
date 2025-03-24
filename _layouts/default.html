@@ -51,6 +51,7 @@
   <div class="container">
     <header>
       <div class="header-logo-nav">
+        <button class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
         <nav aria-label="Main navigation">
           <ul>
             <li><a href="/" class="nav-link">Home</a></li>
@@ -110,8 +111,10 @@
     </footer>
   </div>
 
+  <!-- JavaScript -->
   <script src="/assets/js/copy.js" defer></script>
   <script src="/assets/js/theme-switcher.js" defer></script>
+  <script src="/assets/js/mobile-menu.js" defer></script>
   {% if page.url == "/archives" or page.url == "/archives/" %}
   <script src="/assets/js/archives.js" defer></script>
   {% endif %}
@@ -123,6 +126,12 @@
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = (winScroll / height) * 100;
       document.querySelector('.progress-bar').style.width = scrolled + '%';
+    });
+
+    // Initialize theme on first load
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      document.body.className = savedTheme;
     });
   </script>
 </body>

@@ -4,13 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Initialize theme
   const savedTheme = localStorage.getItem('theme') || 'dark';
-  body.className = savedTheme;
+  body.classList.add(savedTheme);
   updateIcon(savedTheme);
 
   // Toggle theme
   themeToggle.addEventListener('click', () => {
     const isDark = body.classList.contains('dark');
-    body.classList.replace(isDark ? 'dark' : 'light', isDark ? 'light' : 'dark');
+    body.classList.remove(isDark ? 'dark' : 'light');
+    body.classList.add(isDark ? 'light' : 'dark');
     localStorage.setItem('theme', isDark ? 'light' : 'dark');
     updateIcon(isDark ? 'light' : 'dark');
   });
