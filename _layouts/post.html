@@ -15,6 +15,7 @@ layout: default
   </header>
 
   <div class="post-content">
+    {% if page.description %}<p class="post-description">{{ page.description }}</p>{% endif %}
     {{ content }}
   </div>
 

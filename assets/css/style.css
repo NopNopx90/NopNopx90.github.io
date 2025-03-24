@@ -12,6 +12,7 @@
   --code-bg: #111;
   --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   --header-height: 70px;
+  --site-title-color: #f0f0f0;
 }
 
 body.light {
@@ -27,6 +28,7 @@ body.light {
   --border-color: #ddd;
   --code-bg: #f2f2f2;
   --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --site-title-color: #2a2a2a;
 }
 
 /* Base Styles */
@@ -117,12 +119,21 @@ body {
   gap: 1rem;
 }
 
+.site-title {
+  color: var(--site-title-color);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
 .banner .tagline {
   font-family: 'Fira Code', monospace;
   font-size: clamp(1rem, 2vw, 1.5rem);
   margin-top: 0;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
   color: var(--accent-color);
+}
+
+.banner h1 a {
+  text-decoration: none;
 }
 
 .logo {
@@ -267,7 +278,8 @@ nav ul li a:hover::after {
 }
 
 .latest-posts {
-  margin-top: -2rem;
+  margin-top: 1rem;
+  padding-top: 2rem;
   position: relative;
   z-index: 2;
 }
@@ -335,6 +347,7 @@ nav ul li a:hover::after {
   border-radius: 4px;
   font-size: 0.8rem;
   color: var(--text-primary);
+  display: inline-block; 
 }
 
 .post-title {

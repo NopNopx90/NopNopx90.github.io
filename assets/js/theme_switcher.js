@@ -2,16 +2,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeToggle = document.getElementById('theme-toggle');
   const body = document.body;
   
-  // Initialize theme
+  // Initialize theme - use classList.replace instead of add
   const savedTheme = localStorage.getItem('theme') || 'dark';
-  body.classList.add(savedTheme);
+  body.classList.replace(body.classList[0], savedTheme);
   updateIcon(savedTheme);
 
   // Toggle theme
   themeToggle.addEventListener('click', () => {
     const isDark = body.classList.contains('dark');
-    body.classList.remove(isDark ? 'dark' : 'light');
-    body.classList.add(isDark ? 'light' : 'dark');
+    body.classList.replace(isDark ? 'dark' : 'light', isDark ? 'light' : 'dark');
     localStorage.setItem('theme', isDark ? 'light' : 'dark');
     updateIcon(isDark ? 'light' : 'dark');
   });

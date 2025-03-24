@@ -5,7 +5,7 @@ permalink: /
 ---
 
 <section class="latest-posts">
-  <h2>Latest Writeups</h2>
+  <h2 class="section-title">Latest Writeups</h2>
   <div class="posts-list">
     {% for post in site.posts limit:5 %}
       <div class="post-item">
@@ -18,7 +18,11 @@ permalink: /
             <span class="reading-time">{{ post.content | number_of_words | divided_by: 250 | plus: 1 }} min read</span>
           </div>
           <h2 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
-          <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+          <p class="post-excerpt">
+            {% if post.description %}{{ post.description }}
+            {% else %}{{ post.excerpt | strip_html | truncate: 150 }}
+            {% endif %}
+          </p>
           <a href="{{ post.url }}" class="read-more">Read More →</a>
         </div>
       </div>
@@ -26,6 +30,6 @@ permalink: /
   </div>
   
   <div class="see-more">
-    <a href="/archives" class="btn">View All Writeups →</a>
+    <a href="/archives" class="btn primary-btn">View All Writeups →</a>
   </div>
 </section>
