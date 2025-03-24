@@ -636,7 +636,7 @@ footer {
 }
 
 .error-code::after {
-  color: #f0f;
+  color: rgb(255, 255, 255);
   z-index: -2;
   transform: translateX(5px);
   animation: glitch 0.3s infinite reverse;
