@@ -2,34 +2,41 @@ document.addEventListener('DOMContentLoaded', function() {
   const themeToggle = document.getElementById('theme-toggle');
   const body = document.body;
   
-  // Check for saved theme preference or default to dark
-  const savedTheme = localStorage.getItem('theme') || 'dark';
-  body.classList.add(savedTheme);
+  // Initialize theme from localStorage or prefer-color-scheme
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  let savedTheme = localStorage.getItem('theme');
   
-  // Update toggle button icon based on current theme
+  if (!savedTheme) {
+    savedTheme = prefersDark ? 'dark' : 'light';
+  }
+  
+  body.className = savedTheme;
   updateToggleIcon(savedTheme);
-  
-  // Toggle theme when button is clicked
-  themeToggle.addEventListener('click', function() {
-    if (body.classList.contains('dark')) {
-      body.classList.remove('dark');
-      body.classList.add('light');
-      localStorage.setItem('theme', 'light');
-      updateToggleIcon('light');
-    } else {
-      body.classList.remove('light');
-      body.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-      updateToggleIcon('dark');
+
+  // System theme change listener
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    if (!localStorage.getItem('theme')) {
+      body.className = e.matches ? 'dark' : 'light';
+      updateToggleIcon(body.className);
     }
   });
-  
-  // Update icon based on theme
+
+  themeToggle.addEventListener('click', function() {
+    const isDark = body.classList.contains('dark');
+    body.className = isDark ? 'light' : 'dark';
+    localStorage.setItem('theme', body.className);
+    updateToggleIcon(body.className);
+    
+    // Dispatch event for other components
+    document.dispatchEvent(new CustomEvent('themeChanged', {
+      detail: { theme: body.className }
+    }));
+  });
+
   function updateToggleIcon(theme) {
-    if (theme === 'dark') {
-      themeToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
-    } else {
-      themeToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
-    }
+    themeToggle.innerHTML = theme === 'dark' ?
+      '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>' :
+      '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+    themeToggle.setAttribute('aria-label', `${theme === 'dark' ? 'Switch to light' : 'Switch to dark'} mode`);
   }
 });

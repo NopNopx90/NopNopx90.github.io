@@ -2,40 +2,26 @@ document.addEventListener('DOMContentLoaded', function() {
   const tagButtons = document.querySelectorAll('.tag-list .tag');
   const posts = document.querySelectorAll('.post-item');
   const yearSections = document.querySelectorAll('.year-section');
+  const searchInput = document.getElementById('searchInput');
   
-  // Filter posts by category
+  // Filter by category
   tagButtons.forEach(button => {
     button.addEventListener('click', function() {
-      // Remove active class from all buttons
       tagButtons.forEach(btn => btn.classList.remove('active'));
-      
-      // Add active class to clicked button
       this.classList.add('active');
-      
-      const category = this.getAttribute('data-category');
-      
-      // Filter posts
-      posts.forEach(post => {
-        if (category === 'all' || post.getAttribute('data-category') === category) {
-          post.style.display = 'flex';
-        } else {
-          post.style.display = 'none';
-        }
-      });
-      
-      // Check if year sections are empty and hide if needed
-      yearSections.forEach(section => {
-        const visiblePosts = section.querySelectorAll('.post-item[style="display: flex"]').length;
-        if (visiblePosts === 0) {
-          section.style.display = 'none';
-        } else {
-          section.style.display = 'block';
-        }
-      });
+      filterPosts(this.dataset.category);
     });
   });
   
-  // Add animation to posts when they come into view
+  // Search functionality
+  if (searchInput) {
+    searchInput.addEventListener('input', debounce(() => {
+      const term = searchInput.value.toLowerCase();
+      filterPosts(document.querySelector('.tag-list .tag.active').dataset.category, term);
+    }, 300));
+  }
+  
+  // Intersection Observer for animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -45,7 +31,36 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }, { threshold: 0.1 });
   
-  posts.forEach(post => {
-    observer.observe(post);
-  });
+  posts.forEach(post => observer.observe(post));
+  
+  function filterPosts(category, searchTerm = '') {
+    posts.forEach(post => {
+      const matchesCategory = category === 'all' || post.dataset.category === category;
+      const matchesSearch = searchTerm === '' || 
+        post.querySelector('.post-title').textContent.toLowerCase().includes(searchTerm) ||
+        post.querySelector('.post-meta .tag').textContent.toLowerCase().includes(searchTerm);
+      
+      if (matchesCategory && matchesSearch) {
+        post.style.display = 'flex';
+      } else {
+        post.style.display = 'none';
+      }
+    });
+    
+    // Handle year sections visibility
+    yearSections.forEach(section => {
+      const hasVisiblePosts = [...section.querySelectorAll('.post-item')]
+        .some(post => post.style.display !== 'none');
+      section.style.display = hasVisiblePosts ? 'block' : 'none';
+    });
+  }
+  
+  function debounce(func, wait) {
+    let timeout;
+    return function() {
+      const context = this, args = arguments;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+  }
 });
