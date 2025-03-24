@@ -10,7 +10,10 @@ layout: default
       {% if page.categories %}
         <span class="tag">{{ page.categories | first }}</span>
       {% endif %}
-      <span class="reading-time">{{ content | number_of_words | divided_by: 250 | plus: 1 }} min read</span>
+      <span class="reading-time">
+        {% assign words = page.content | number_of_words %}
+        {% if words < 360 %}1 min read{% else %}{{ words | divided_by: 180 }} min read{% endif %}
+      </span>
     </div>
   </header>
 

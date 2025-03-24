@@ -15,7 +15,10 @@ permalink: /
             {% if post.categories %}
               <span class="tag">{{ post.categories | first }}</span>
             {% endif %}
-            <span class="reading-time">{{ post.content | number_of_words | divided_by: 250 | plus: 1 }} min read</span>
+            <span class="reading-time">
+              {% assign words = post.content | number_of_words %}
+              {% if words < 360 %}1 min read{% else %}{{ words | divided_by: 180 }} min read{% endif %}
+            </span>
           </div>
           <h2 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
           <p class="post-excerpt">
@@ -23,7 +26,7 @@ permalink: /
             {% else %}{{ post.excerpt | strip_html | truncate: 150 }}
             {% endif %}
           </p>
-          <a href="{{ post.url }}" class="read-more">Read More →</a>
+          <a href="{{ post.url }}" class="read-more primary-btn">Read More →</a>
         </div>
       </div>
     {% endfor %}
