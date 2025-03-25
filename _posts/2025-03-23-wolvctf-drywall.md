@@ -7,6 +7,11 @@ tags: [userland, pwn, binary-exploitation, ROP]
 description: "Detailed writeup of the Drywall challenge from WolvCTF 2025 covering ROP chain development and exploit mitigation bypass."
 ---
 
+# DryWall – writeup 🧱🔨 from Wolvctf
+
+**Challenge Name**: DryWall
+**Category**: Pwn Userland
+
 ---
 
 ## TL;DR

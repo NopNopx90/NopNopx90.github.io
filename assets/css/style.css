@@ -28,7 +28,7 @@ body.light {
   --border-color: #ddd;
   --code-bg: #f2f2f2;
   --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  --site-title-color: #2a2a2a;
+  --site-title-color: #ffffff;
 }
 
 /* Base Styles */
@@ -63,7 +63,7 @@ body {
 
 /* Banner */
 .banner {
-  background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(0,0,0,0.5)),
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.486), rgba(0, 0, 0, 0.206)),
               url('/assets/images/background.webp') center/cover no-repeat;
   height: 60vh;
   min-height: 400px;
