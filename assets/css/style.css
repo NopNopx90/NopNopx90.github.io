@@ -76,10 +76,10 @@ body {
   transition: all 0.3s ease;
 }
 
-/* .banner:hover {
+.banner:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-} */
+  box-shadow: 0 10px 20px #ffffff;
+}
 
 .banner::after {
   content: '';
