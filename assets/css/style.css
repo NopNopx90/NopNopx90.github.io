@@ -78,7 +78,7 @@ body {
 
 .banner:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px #ffffff;
+  box-shadow: 0 10px 20px #00000033;
 }
 
 .banner::after {
