@@ -10,7 +10,7 @@
   --accent-hover: #ff3e3e;
   --border-color: #474747;
   --code-bg: #111;
-  --card-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+  --card-shadow: 0 5px 15px rgb(38, 38, 38);
   --header-height: 70px;
   --site-title-color: #f0f0f0;
 }
