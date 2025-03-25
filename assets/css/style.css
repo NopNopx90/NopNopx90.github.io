@@ -10,7 +10,7 @@
   --accent-hover: #ff3e3e;
   --border-color: #252525;
   --code-bg: #111;
-  --card-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+  --card-shadow: 0 5px 15px rgba(174, 174, 174, 0.3);
   --header-height: 70px;
   --site-title-color: #f0f0f0;
 }
@@ -18,7 +18,7 @@
 body.light {
   /* Light theme */
   --bg-primary: #e0e0e0;
-  --bg-secondary: #e4e4e4ca;
+  --bg-secondary: #ff005dca;
   --bg-tertiary: #c7c6c6c1;
   --text-primary: #252525;
   --text-secondary: #555;
@@ -496,7 +496,6 @@ nav ul li a:hover::after {
   margin: 2rem 0;
 }
 
-/* Enhanced Code Blocks */
 pre {
   background: var(--code-bg);
   padding: 1.5rem;
@@ -858,5 +857,3 @@ footer {
   }
 }
 
-
-.banner:hover
