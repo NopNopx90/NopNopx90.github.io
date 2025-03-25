@@ -6,20 +6,20 @@
   --text-primary: #e0e0e0;
   --text-secondary: #bbb;
   --text-muted: #999;
-  --accent-color: #ff4b4b;
-  --accent-hover: #ff7a7a;
+  --accent-color: #ff4141;
+  --accent-hover: #ff3e3e;
   --border-color: #333;
   --code-bg: #111;
-  --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  --card-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
   --header-height: 70px;
   --site-title-color: #f0f0f0;
 }
 
 body.light {
   /* Light theme */
-  --bg-primary: #f8f8f8;
-  --bg-secondary: #ffffff;
-  --bg-tertiary: #e8e8e8;
+  --bg-primary: #e0e0e0;
+  --bg-secondary: #e4e4e4ca;
+  --bg-tertiary: #e8e8e8e0;
   --text-primary: #252525;
   --text-secondary: #555;
   --text-muted: #777;
@@ -78,7 +78,7 @@ body {
 
 .banner:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px #00000033;
+  box-shadow: 0 10px 20px #0000005b;
 }
 
 .banner::after {
@@ -857,3 +857,6 @@ footer {
     border-radius: 0;
   }
 }
+
+
+.banner:hover
