@@ -27,7 +27,7 @@ body.light {
   --accent-hover: #c42f2f;
   --border-color: #ddd;
   --code-bg: #f2f2f2;
-  --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.096);
   --site-title-color: #ffffff;
 }
 
