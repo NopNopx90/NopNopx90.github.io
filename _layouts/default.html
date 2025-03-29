@@ -24,18 +24,22 @@
   
   <!-- Additional CSS for circular logo -->
   <style>
-    .logo {
-      height: clamp(40px, 5vw, 60px);
-      width: clamp(40px, 5vw, 60px);
-      border-radius: 50%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-      border: 2px solid var(--accent-color);
-    }
-    .logo:hover {
-      transform: rotate(15deg) scale(1.1);
-    }
-  </style>
+  .logo {
+    height: clamp(40px, 5vw, 60px);
+    width: clamp(40px, 5vw, 60px);
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    /* Remove the border and add a shadow/highlight effect instead */
+    border: none; 
+    box-shadow: 0 0 10px 2px var(--accent-color);
+    /* Alternative: You can try a glow effect */
+    /* filter: drop-shadow(0 0 8px var(--accent-color)); */
+  }
+  .logo:hover {
+    transform: rotate(15deg) scale(1.1);
+  }
+</style>
   
   <!-- Open Graph -->
   <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}Home{% endif %} | NopNop0x90 Blog">
@@ -52,24 +56,28 @@
   <div class="progress-bar"></div>
   
   <div class="banner">
-    <div class="banner-content">
-      <h1>
-        <a href="/">
-          <img src="/assets/images/logo.png" alt="NopNop0x90 Logo" class="logo">
-          <span class="site-title">NopNop0x90's Blog</span>
-        </a>
-      </h1>
-      <p class="tagline">
-        {% if page.url == "/archives" or page.url == "/archives/" %}
-          • Archives •
-        {% elsif page.url == "/about" or page.url == "/about/" %}
-          • About Me •
-        {% else %}
-          • CTF Writeups •
-        {% endif %}
-      </p>
-    </div>
+  <div class="banner-content">
+    <h1>
+      <a href="/">
+        <img src="/assets/images/logo.png" alt="NopNop0x90 Logo" class="logo">
+        <span class="site-title">
+          {% if page.url == "/archives" or page.url == "/archives/" %}
+            • Archives •
+          {% elsif page.url == "/about" or page.url == "/about/" %}
+            • About Me •
+          {% else %}
+            NopNop0x90's Blog
+          {% endif %}
+        </span>
+      </a>
+    </h1>
+    {% if page.url == "/" %}
+    <p class="tagline">
+      • CTF Writeups •
+    </p>
+    {% endif %}
   </div>
+</div>
   
   <div class="container">
     <header>
