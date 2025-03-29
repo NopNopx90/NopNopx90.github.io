@@ -29,15 +29,15 @@
     width: clamp(40px, 5vw, 60px);
     border-radius: 50%;
     object-fit: cover;
-    transition: transform 0.3s ease, filter 0.3s ease;
-    border: none;
-    /* Using filter for a glowing effect */
-    filter: drop-shadow(0 0 5px var(--accent-color));
+    transition: transform 0.3s ease;
+    /* Remove the border and add a shadow/highlight effect instead */
+    border: none; 
+    box-shadow: 0 0 10px 2px var(--accent-color);
+    /* Alternative: You can try a glow effect */
+    /* filter: drop-shadow(0 0 8px var(--accent-color)); */
   }
   .logo:hover {
     transform: rotate(15deg) scale(1.1);
-    /* Increase the glow effect on hover */
-    filter: drop-shadow(0 0 8px var(--accent-color)) brightness(1.1);
   }
 </style>
   
