@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.title }} | NopNop0x90 Blog</title>
+  <title>{% if page.title %}{{ page.title }}{% else %}Home{% endif %} | NopNop0x90 Blog</title>
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
   
   <!-- Preload critical resources -->
@@ -22,8 +22,23 @@
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;700&display=swap">
   
+  <!-- Additional CSS for circular logo -->
+  <style>
+    .logo {
+      height: clamp(40px, 5vw, 60px);
+      width: clamp(40px, 5vw, 60px);
+      border-radius: 50%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+      border: 2px solid var(--accent-color);
+    }
+    .logo:hover {
+      transform: rotate(15deg) scale(1.1);
+    }
+  </style>
+  
   <!-- Open Graph -->
-  <meta property="og:title" content="{{ page.title }} | NopNop0x90 Blog">
+  <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}Home{% endif %} | NopNop0x90 Blog">
   <meta property="og:description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
   <meta property="og:image" content="/assets/images/OG.webp">
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
@@ -44,7 +59,15 @@
           <span class="site-title">NopNop0x90's Blog</span>
         </a>
       </h1>
-      <p class="tagline">• CTF Writeups •</p>
+      <p class="tagline">
+        {% if page.url == "/archives" or page.url == "/archives/" %}
+          • Archives •
+        {% elsif page.url == "/about" or page.url == "/about/" %}
+          • About Me •
+        {% else %}
+          • CTF Writeups •
+        {% endif %}
+      </p>
     </div>
   </div>
   

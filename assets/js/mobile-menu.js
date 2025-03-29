@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     navList.classList.toggle('active');
     menuBtn.innerHTML = navList.classList.contains('active') ? '✕' : '☰';
     
-    // Close menu when clicking outside
     if(navList.classList.contains('active')) {
       document.addEventListener('click', closeMenuOnClickOutside);
     } else {
