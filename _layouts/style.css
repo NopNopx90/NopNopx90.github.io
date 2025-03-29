@@ -139,10 +139,13 @@ body {
 .logo {
   height: clamp(40px, 5vw, 60px);
   transition: transform 0.3s ease;
+  animation: pulse-glow 2s infinite;
 }
 
 .logo:hover {
   transform: rotate(15deg) scale(1.1);
+  animation: none;
+  filter: drop-shadow(0 0 12px var(--accent-color));
 }
 
 /* Layout */
@@ -733,6 +736,12 @@ footer {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes pulse-glow {
+  0% { filter: drop-shadow(0 0 5px var(--accent-color)); }
+  50% { filter: drop-shadow(0 0 10px var(--accent-color)); }
+  100% { filter: drop-shadow(0 0 5px var(--accent-color)); }
 }
 
 @keyframes glitch {
