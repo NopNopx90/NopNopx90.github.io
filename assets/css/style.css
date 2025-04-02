@@ -1,13 +1,13 @@
 :root {
   /* Dark theme (default) */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #222;
-  --bg-tertiary: #333;
+  --bg-primary: #0c0c14;
+  --bg-secondary: #131322;
+  --bg-tertiary: #1c1c2a;
   --text-primary: #e0e0e0;
   --text-secondary: #bbb;
   --text-muted: #999;
-  --accent-color: #ff4141;
-  --accent-hover: #ff3e3e;
+  --accent-color: #ff4170;
+  --accent-hover: #ff2d62;
   --border-color: #535353;
   --code-bg: #111;
   --card-shadow: 0 5px 15px rgb(38, 38, 38);
@@ -206,6 +206,7 @@ nav ul li a {
   position: relative;
   color: var(--text-primary);
   padding: 0.5rem 0;
+  transition: color 0.3s ease;
 }
 
 nav ul li a::after {
@@ -240,6 +241,8 @@ nav ul li a:hover::after {
 
 #theme-toggle:hover {
   background-color: var(--bg-tertiary);
+  transform: rotate(30deg);
+  color: var(--accent-color);
 }
 
 /* Social Icons */
@@ -685,11 +688,11 @@ footer {
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
-  box-shadow: 0 0 10px rgba(255, 75, 75, 0.5);
+  box-shadow: 0 0 10px rgba(255, 65, 112, 0.5);
 }
 
 .glow-button:hover {
-  box-shadow: 0 0 20px rgba(255, 75, 75, 0.8);
+  box-shadow: 0 0 20px rgba(255, 65, 112, 0.8);
   transform: translateY(-3px);
 }
 
@@ -760,7 +763,6 @@ footer {
   }
   
   header {
-   /* flex-direction: column; */
     padding: 1rem 0;
     position: sticky;
   }
@@ -770,9 +772,6 @@ footer {
   }
   
   nav ul {
-    /* position: fixed;
-    top: var(--header-height);
-    left: 0; */
     width: 100%;
     background: var(--bg-primary);
     flex-direction: column;
