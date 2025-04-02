@@ -167,7 +167,22 @@
       
       menuButton.addEventListener('click', () => {
         navMenu.classList.toggle('active');
+        menuButton.innerHTML = navMenu.classList.contains('active') ? '✕' : '☰';
+        
+        if(navMenu.classList.contains('active')) {
+          document.addEventListener('click', closeMenuOnClickOutside);
+        } else {
+          document.removeEventListener('click', closeMenuOnClickOutside);
+        }
       });
+      
+      function closeMenuOnClickOutside(e) {
+        if(!navMenu.contains(e.target) && !menuButton.contains(e.target)) {
+          navMenu.classList.remove('active');
+          menuButton.innerHTML = '☰';
+          document.removeEventListener('click', closeMenuOnClickOutside);
+        }
+      }
     });
 
     // Add animation to post items
