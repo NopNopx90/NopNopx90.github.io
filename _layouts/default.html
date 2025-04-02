@@ -7,7 +7,7 @@
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
   
   <!-- Preload critical resources -->
-  <link rel="preload" href="/assets/css/style.css" as="style">
+  <link rel="preload" href="/assets/css/darling-franxx-style.css" as="style">
   <link rel="preload" href="/assets/images/background.webp" as="image">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;700&display=swap" as="style">
   
@@ -15,31 +15,12 @@
   <link rel="icon" href="/assets/images/logo.png" type="image/png">
   
   <!-- Theme Color -->
-  <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#f8f8f8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c0c14" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f0f0f5" media="(prefers-color-scheme: light)">
   
   <!-- CSS -->
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/darling-franxx-style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;700&display=swap">
-  
-  <!-- Additional CSS for circular logo -->
-  <style>
-  .logo {
-    height: clamp(40px, 5vw, 60px);
-    width: clamp(40px, 5vw, 60px);
-    border-radius: 50%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-    /* Remove the border and add a shadow/highlight effect instead */
-    border: none; 
-    box-shadow: 0 0 10px 2px var(--accent-color);
-    /* Alternative: You can try a glow effect */
-    /* filter: drop-shadow(0 0 8px var(--accent-color)); */
-  }
-  .logo:hover {
-    transform: rotate(15deg) scale(1.1);
-  }
-</style>
   
   <!-- Open Graph -->
   <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}Home{% endif %} | NopNop0x90 Blog">
@@ -53,31 +34,33 @@
   {% endif %}
 </head>
 <body>
+  <!-- Progress bar for scrolling -->
   <div class="progress-bar"></div>
   
+  <!-- Hero banner with FRANXX aesthetic -->
   <div class="banner">
-  <div class="banner-content">
-    <h1>
-      <a href="/">
-        <img src="/assets/images/logo.png" alt="NopNop0x90 Logo" class="logo">
-        <span class="site-title">
-          {% if page.url == "/archives" or page.url == "/archives/" %}
-            • Archives •
-          {% elsif page.url == "/about" or page.url == "/about/" %}
-            • About Me •
-          {% else %}
-            NopNop0x90's Blog
-          {% endif %}
-        </span>
-      </a>
-    </h1>
-    {% if page.url == "/" %}
-    <p class="tagline">
-      • CTF Writeups •
-    </p>
-    {% endif %}
+    <div class="banner-content">
+      <h1>
+        <a href="/">
+          <img src="/assets/images/logo.png" alt="NopNop0x90 Logo" class="logo">
+          <span class="site-title">
+            {% if page.url == "/archives" or page.url == "/archives/" %}
+              • Archives •
+            {% elsif page.url == "/about" or page.url == "/about/" %}
+              • About Me •
+            {% else %}
+              NopNop0x90's Blog
+            {% endif %}
+          </span>
+        </a>
+      </h1>
+      {% if page.url == "/" %}
+      <p class="tagline">
+        • CTF Writeups •
+      </p>
+      {% endif %}
+    </div>
   </div>
-</div>
   
   <div class="container">
     <header>
@@ -112,7 +95,13 @@
     </header>
 
     <main id="main-content">
+      <!-- FRANXX-style decorative divider before content -->
+      <div class="franxx-divider"></div>
+      
       {{ content }}
+      
+      <!-- FRANXX-style decorative divider after content -->
+      <div class="franxx-divider"></div>
     </main>
 
     <footer>
@@ -143,13 +132,6 @@
   </div>
 
   <!-- JavaScript -->
-  <script src="/assets/js/copy.js" defer></script>
-  <script src="/assets/js/theme-switcher.js" defer></script>
-  <script src="/assets/js/mobile-menu.js" defer></script>
-  {% if page.url == "/archives" or page.url == "/archives/" %}
-  <script src="/assets/js/archives.js" defer></script>
-  {% endif %}
-  
   <script>
     // Scroll progress
     window.addEventListener('scroll', () => {
@@ -159,11 +141,151 @@
       document.querySelector('.progress-bar').style.width = scrolled + '%';
     });
 
-    // Initialize theme on first load
+    // Theme toggler
     document.addEventListener('DOMContentLoaded', () => {
       const savedTheme = localStorage.getItem('theme') || 'dark';
       document.body.className = savedTheme;
+      
+      const themeToggle = document.getElementById('theme-toggle');
+      themeToggle.addEventListener('click', () => {
+        if (document.body.classList.contains('light')) {
+          document.body.className = 'dark';
+          localStorage.setItem('theme', 'dark');
+          themeToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+        } else {
+          document.body.className = 'light';
+          localStorage.setItem('theme', 'light');
+          themeToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+        }
+      });
+    });
+
+    // Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuButton = document.querySelector('.mobile-menu-btn');
+      const navMenu = document.querySelector('nav ul');
+      
+      menuButton.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+      });
+    });
+
+    // Add animation to post items
+    document.addEventListener('DOMContentLoaded', () => {
+      const postItems = document.querySelectorAll('.post-item');
+      postItems.forEach((item, index) => {
+        item.style.animationDelay = `${0.1 * index}s`;
+      });
+    });
+
+    // Code copy function
+    document.addEventListener('DOMContentLoaded', () => {
+      const codeBlocks = document.querySelectorAll('pre');
+      
+      codeBlocks.forEach(block => {
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-btn';
+        copyButton.innerHTML = '<span>Copy</span>';
+        block.appendChild(copyButton);
+        
+        copyButton.addEventListener('click', () => {
+          const code = block.querySelector('code') ? block.querySelector('code').innerText : block.innerText;
+          navigator.clipboard.writeText(code);
+          
+          copyButton.classList.add('copied');
+          copyButton.innerHTML = '<span>Copied!</span>';
+          
+          setTimeout(() => {
+            copyButton.classList.remove('copied');
+            copyButton.innerHTML = '<span>Copy</span>';
+          }, 2000);
+        });
+      });
     });
   </script>
+  
+  {% if page.url == "/archives" or page.url == "/archives/" %}
+  <script>
+    // Archives page functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('searchInput');
+      const sortSelect = document.getElementById('sortSelect');
+      const tagButtons = document.querySelectorAll('.tag');
+      const postItems = document.querySelectorAll('.post-item');
+      
+      // Search functionality
+      if (searchInput) {
+        searchInput.addEventListener('input', filterPosts);
+      }
+      
+      // Sort functionality
+      if (sortSelect) {
+        sortSelect.addEventListener('change', sortPosts);
+      }
+      
+      // Tag filtering
+      tagButtons.forEach(tag => {
+        tag.addEventListener('click', () => {
+          tag.classList.toggle('active');
+          filterPosts();
+        });
+      });
+      
+      function filterPosts() {
+        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+        const activeTags = Array.from(document.querySelectorAll('.tag.active')).map(tag => tag.dataset.tag);
+        
+        let visibleCount = 0;
+        
+        postItems.forEach(post => {
+          const title = post.querySelector('.post-title').textContent.toLowerCase();
+          const excerpt = post.querySelector('.post-excerpt').textContent.toLowerCase();
+          const postTags = Array.from(post.querySelectorAll('.post-meta .tag')).map(tag => tag.textContent);
+          
+          const matchesSearch = searchTerm === '' || title.includes(searchTerm) || excerpt.includes(searchTerm);
+          const matchesTags = activeTags.length === 0 || activeTags.some(tag => postTags.includes(tag));
+          
+          if (matchesSearch && matchesTags) {
+            post.style.display = '';
+            visibleCount++;
+          } else {
+            post.style.display = 'none';
+          }
+        });
+        
+        // Show no results message if needed
+        const noResults = document.querySelector('.no-results');
+        if (noResults) {
+          noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+      }
+      
+      function sortPosts() {
+        if (!sortSelect) return;
+        
+        const sortValue = sortSelect.value;
+        const postsContainer = document.querySelector('.posts-list');
+        const posts = Array.from(postItems);
+        
+        posts.sort((a, b) => {
+          const dateA = new Date(a.dataset.date);
+          const dateB = new Date(b.dataset.date);
+          
+          if (sortValue === 'newest') {
+            return dateB - dateA;
+          } else {
+            return dateA - dateB;
+          }
+        });
+        
+        // Remove all posts
+        posts.forEach(post => postsContainer.removeChild(post));
+        
+        // Add them back in sorted order
+        posts.forEach(post => postsContainer.appendChild(post));
+      }
+    });
+  </script>
+  {% endif %}
 </body>
 </html>
