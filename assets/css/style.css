@@ -31,7 +31,6 @@ body.light {
   --tag-color: #e3e3ed;
 }
 
-/* Base Styles */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
@@ -49,7 +48,6 @@ body {
   flex-direction: column;
 }
 
-/* Progress Bar */
 .progress-bar {
   position: fixed;
   top: 0;
@@ -61,7 +59,6 @@ body {
   transition: width 0.1s ease;
 }
 
-/* Banner */
 .banner {
   background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)),
               url('/assets/images/background.webp') center/cover no-repeat;
@@ -74,7 +71,7 @@ body {
   overflow: hidden;
   margin-bottom: 0;
   transition: all 0.3s ease;
-  border-bottom: 4px solid var(--accent-color);
+  /*border-bottom: 4px solid var(--accent-color);*/
 }
 
 .banner:hover {
@@ -167,7 +164,7 @@ body {
   object-fit: cover;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: none;
-  /* box-shadow: 0 0 15px 2px var(--accent-color); */
+  box-shadow: 0 0 15px 2px var(--accent-color);
 }
 
 .logo:hover {
@@ -175,7 +172,6 @@ body {
   box-shadow: 0 0 20px 5px var(--accent-color);
 }
 
-/* Layout */
 .container {
   max-width: 1100px;
   margin: 0 auto;
@@ -183,7 +179,6 @@ body {
   flex: 1;
 }
 
-/* Header */
 header {
   padding: 1rem 0;
   border-bottom: 1px solid var(--border-color);
@@ -208,7 +203,6 @@ header {
   gap: 1rem;
 }
 
-/* Mobile Menu Button */
 .mobile-menu-btn {
   display: none;
   background: none;
@@ -277,7 +271,7 @@ nav ul li a:hover::after {
 
 #theme-toggle:hover {
   background-color: var(--bg-tertiary);
-  transform: rotate(30deg);
+  transform: rotate(45deg);
   color: var(--accent-color);
 }
 
@@ -850,7 +844,7 @@ footer::before {
 
 .franxx-divider .x-blue,
 .franxx-divider .x-pink {
-  font-size: 26px; /* Added explicit font size */
+  font-size: 26px;
   display: inline-block;
   position: relative;
   z-index: 2;

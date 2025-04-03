@@ -1,20 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
   const themeToggle = document.getElementById('theme-toggle');
   const body = document.body;
-  
-  // Initialize theme - use classList.replace instead of add
   const savedTheme = localStorage.getItem('theme') || 'dark';
-  body.classList.replace(body.classList[0], savedTheme);
+  
+  body.classList.remove('dark', 'light');
+  body.classList.add(savedTheme);
   updateIcon(savedTheme);
-
+  
   // Toggle theme
   themeToggle.addEventListener('click', () => {
     const isDark = body.classList.contains('dark');
-    body.classList.replace(isDark ? 'dark' : 'light', isDark ? 'light' : 'dark');
-    localStorage.setItem('theme', isDark ? 'light' : 'dark');
-    updateIcon(isDark ? 'light' : 'dark');
+    const newTheme = isDark ? 'light' : 'dark';
+    
+    body.classList.remove('dark', 'light');
+    body.classList.add(newTheme);
+    
+    localStorage.setItem('theme', newTheme);
+    updateIcon(newTheme);
   });
-
+  
   function updateIcon(theme) {
     themeToggle.innerHTML = theme === 'dark' ?
       `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
