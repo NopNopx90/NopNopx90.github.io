@@ -7,7 +7,7 @@
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
   
   <!-- Preload critical resources -->
-  <link rel="preload" href="/assets/css/style.css" as="style">
+  <link rel="preload" href="/assets/css/darling-franxx-style.css" as="style">
   <link rel="preload" href="/assets/images/background.webp" as="image">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;700&display=swap" as="style">
   
@@ -15,31 +15,12 @@
   <link rel="icon" href="/assets/images/logo.png" type="image/png">
   
   <!-- Theme Color -->
-  <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#f8f8f8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c0c14" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f0f0f5" media="(prefers-color-scheme: light)">
   
   <!-- CSS -->
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/darling-franxx-style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;700&display=swap">
-  
-  <!-- Additional CSS for circular logo -->
-  <style>
-  .logo {
-    height: clamp(40px, 5vw, 60px);
-    width: clamp(40px, 5vw, 60px);
-    border-radius: 50%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-    /* Remove the border and add a shadow/highlight effect instead */
-    border: none; 
-    box-shadow: 0 0 10px 2px var(--accent-color);
-    /* Alternative: You can try a glow effect */
-    /* filter: drop-shadow(0 0 8px var(--accent-color)); */
-  }
-  .logo:hover {
-    transform: rotate(15deg) scale(1.1);
-  }
-</style>
   
   <!-- Open Graph -->
   <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}Home{% endif %} | NopNop0x90 Blog">
@@ -53,31 +34,33 @@
   {% endif %}
 </head>
 <body>
+  <!-- Progress bar for scrolling -->
   <div class="progress-bar"></div>
   
+  <!-- Hero banner with FRANXX aesthetic -->
   <div class="banner">
-  <div class="banner-content">
-    <h1>
-      <a href="/">
-        <img src="/assets/images/logo.png" alt="NopNop0x90 Logo" class="logo">
-        <span class="site-title">
-          {% if page.url == "/archives" or page.url == "/archives/" %}
-            • Archives •
-          {% elsif page.url == "/about" or page.url == "/about/" %}
-            • About Me •
-          {% else %}
-            NopNop0x90's Blog
-          {% endif %}
-        </span>
-      </a>
-    </h1>
-    {% if page.url == "/" %}
-    <p class="tagline">
-      • CTF Writeups •
-    </p>
-    {% endif %}
+    <div class="banner-content">
+      <h1>
+        <a href="/">
+          <img src="/assets/images/logo.png" alt="NopNop0x90 Logo" class="logo">
+          <span class="site-title">
+            {% if page.url == "/archives" or page.url == "/archives/" %}
+              • Archives •
+            {% elsif page.url == "/about" or page.url == "/about/" %}
+              • About Me •
+            {% else %}
+              NopNop0x90's Blog
+            {% endif %}
+          </span>
+        </a>
+      </h1>
+      {% if page.url == "/" %}
+      <p class="tagline">
+        • CTF Writeups •
+      </p>
+      {% endif %}
+    </div>
   </div>
-</div>
   
   <div class="container">
     <header>
@@ -112,7 +95,67 @@
     </header>
 
     <main id="main-content">
+      <!-- FRANXX-style decorative divider before content -->
+      <div class="franxx-divider">
+        <span class="x-blue">X</span><span class="x-pink">X</span>
+      </div>
+      
       {{ content }}
+      
+      <!-- FRANXX-style decorative divider after content -->
+      <div class="franxx-divider">
+        <span class="x-blue">X</span><span class="x-pink">X</span>
+      </div>
+      
+      <!-- Pagination for home and archives pages -->
+      {% if paginator.total_pages > 1 and page.url == "/" or page.url == "/archives" or page.url == "/archives/" %}
+      <div class="pagination">
+        <div class="pagination-inner">
+          {% if paginator.previous_page %}
+            <a href="{{ paginator.previous_page_path | relative_url }}" class="page-link">&laquo; Prev</a>
+          {% else %}
+            <span class="page-link disabled">&laquo; Prev</span>
+          {% endif %}
+          
+          {% if paginator.page_trail %}
+            {% for trail in paginator.page_trail %}
+              <a href="{{ trail.path | relative_url }}" 
+                 class="page-link {% if page.url == trail.path %}active{% endif %}">
+                {{ trail.num }}
+              </a>
+            {% endfor %}
+          {% else %}
+            {% for page in (1..paginator.total_pages) %}
+              {% if page == paginator.page %}
+                <span class="page-link active">{{ page }}</span>
+              {% elsif page == 1 %}
+                <a href="{{ '/' | relative_url }}" class="page-link">{{ page }}</a>
+              {% else %}
+                <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}" class="page-link">{{ page }}</a>
+              {% endif %}
+              
+              {% assign page_diff = paginator.total_pages | minus: page %}
+              {% if page_diff > 3 and page_diff < paginator.total_pages %}
+                {% if forloop.index == 3 %}
+                  <span class="page-link ellipsis">...</span>
+                  {% break %}
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+            
+            {% if paginator.total_pages > 4 %}
+              <a href="{{ site.paginate_path | relative_url | replace: ':num', paginator.total_pages }}" class="page-link">{{ paginator.total_pages }}</a>
+            {% endif %}
+          {% endif %}
+          
+          {% if paginator.next_page %}
+            <a href="{{ paginator.next_page_path | relative_url }}" class="page-link">Next &raquo;</a>
+          {% else %}
+            <span class="page-link disabled">Next &raquo;</span>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
     </main>
 
     <footer>
@@ -143,27 +186,47 @@
   </div>
 
   <!-- JavaScript -->
-  <script src="/assets/js/copy.js" defer></script>
-  <script src="/assets/js/theme-switcher.js" defer></script>
-  <script src="/assets/js/mobile-menu.js" defer></script>
-  {% if page.url == "/archives" or page.url == "/archives/" %}
-  <script src="/assets/js/archives.js" defer></script>
-  {% endif %}
-  
+  <!-- Scroll progress -->
   <script>
-    // Scroll progress
     window.addEventListener('scroll', () => {
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = (winScroll / height) * 100;
       document.querySelector('.progress-bar').style.width = scrolled + '%';
     });
-
-    // Initialize theme on first load
+    
+    // Add animation to post items
     document.addEventListener('DOMContentLoaded', () => {
-      const savedTheme = localStorage.getItem('theme') || 'dark';
-      document.body.className = savedTheme;
+      const postItems = document.querySelectorAll('.post-item');
+      postItems.forEach((item, index) => {
+        item.style.animationDelay = `${0.1 * index}s`;
+      });
     });
   </script>
+  
+  <!-- External JavaScript files -->
+  <script src="/assets/js/theme-switcher.js"></script>
+  <script src="/assets/js/mobile-menu.js"></script>
+  <script src="/assets/js/copy.js"></script>
+  
+  {% if page.url == "/archives" or page.url == "/archives/" or page.url == "/" %}
+  <script src="/assets/js/archives.js"></script>
+  
+  <!-- Pagination JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Pagination button hover effects
+      const pageLinks = document.querySelectorAll('.page-link:not(.disabled)');
+      pageLinks.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+          link.classList.add('hover');
+        });
+        link.addEventListener('mouseleave', () => {
+          link.classList.remove('hover');
+        });
+      });
+    });
+  </script>
+  {% endif %}
 </body>
 </html>
