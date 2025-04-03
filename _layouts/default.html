@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
-  <script>
-    // Immediately apply the saved theme before DOM is fully loaded
-    (function() {
-      const savedTheme = localStorage.getItem('theme') || 'dark';
-      document.documentElement.classList.remove('dark', 'light');
-      document.documentElement.classList.add(savedTheme);
-      document.body.classList.remove('dark', 'light');
-      document.body.classList.add(savedTheme);
-    })();
-  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if page.title %}{{ page.title }}{% else %}Home{% endif %} | NopNop0x90 Blog</title>
@@ -196,20 +186,37 @@
   </div>
 
   <!-- JavaScript -->
-  <!-- Scroll progress -->
   <script>
-    window.addEventListener('scroll', () => {
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      document.querySelector('.progress-bar').style.width = scrolled + '%';
-    });
-    
-    // Add animation to post items
     document.addEventListener('DOMContentLoaded', () => {
+      // Apply saved theme
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.classList.remove('dark', 'light');
+      document.documentElement.classList.add(savedTheme);
+      document.body.classList.remove('dark', 'light');
+      document.body.classList.add(savedTheme);
+  
+      // Scroll progress
+      const progressBar = document.querySelector('.progress-bar');
+      if (progressBar) {
+        window.addEventListener('scroll', () => {
+          const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          const scrolled = (winScroll / height) * 100;
+          progressBar.style.width = scrolled + '%';
+        });
+      }
+  
+      // Add animation to post items
       const postItems = document.querySelectorAll('.post-item');
       postItems.forEach((item, index) => {
         item.style.animationDelay = `${0.1 * index}s`;
+      });
+  
+      // Pagination button hover effects
+      const pageLinks = document.querySelectorAll('.page-link:not(.disabled)');
+      pageLinks.forEach(link => {
+        link.addEventListener('mouseenter', () => link.classList.add('hover'));
+        link.addEventListener('mouseleave', () => link.classList.remove('hover'));
       });
     });
   </script>
@@ -221,22 +228,7 @@
   
   {% if page.url == "/archives" or page.url == "/archives/" or page.url == "/" %}
   <script src="/assets/js/archives.js"></script>
-  
-  <!-- Pagination JS -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Pagination button hover effects
-      const pageLinks = document.querySelectorAll('.page-link:not(.disabled)');
-      pageLinks.forEach(link => {
-        link.addEventListener('mouseenter', () => {
-          link.classList.add('hover');
-        });
-        link.addEventListener('mouseleave', () => {
-          link.classList.remove('hover');
-        });
-      });
-    });
-  </script>
   {% endif %}
+  
 </body>
 </html>

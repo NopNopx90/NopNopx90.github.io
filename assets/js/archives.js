@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const posts = document.querySelectorAll('.post-item');
   const yearSections = document.querySelectorAll('.year-section');
   const searchInput = document.getElementById('searchInput');
-  
+
   // Filter by category
   tagButtons.forEach(button => {
     button.addEventListener('click', function() {
@@ -12,15 +12,16 @@ document.addEventListener('DOMContentLoaded', function() {
       filterPosts(this.dataset.category);
     });
   });
-  
+
   // Search functionality
   if (searchInput) {
     searchInput.addEventListener('input', debounce(() => {
-      const term = searchInput.value.toLowerCase();
-      filterPosts(document.querySelector('.tag-list .tag.active').dataset.category, term);
+      const activeTag = document.querySelector('.tag-list .tag.active');
+      const category = activeTag ? activeTag.dataset.category : 'all';
+      filterPosts(category, searchInput.value.toLowerCase());
     }, 300));
   }
-  
+
   // Intersection Observer for animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -30,23 +31,19 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }, { threshold: 0.1 });
-  
+
   posts.forEach(post => observer.observe(post));
-  
+
   function filterPosts(category, searchTerm = '') {
     posts.forEach(post => {
       const matchesCategory = category === 'all' || post.dataset.category === category;
       const matchesSearch = searchTerm === '' || 
-        post.querySelector('.post-title').textContent.toLowerCase().includes(searchTerm) ||
-        post.querySelector('.post-meta .tag').textContent.toLowerCase().includes(searchTerm);
+        post.querySelector('.post-title')?.textContent.toLowerCase().includes(searchTerm) ||
+        post.querySelector('.post-meta .tag')?.textContent.toLowerCase().includes(searchTerm);
       
-      if (matchesCategory && matchesSearch) {
-        post.style.display = 'flex';
-      } else {
-        post.style.display = 'none';
-      }
+      post.style.display = matchesCategory && matchesSearch ? 'flex' : 'none';
     });
-    
+
     // Handle year sections visibility
     yearSections.forEach(section => {
       const hasVisiblePosts = [...section.querySelectorAll('.post-item')]
@@ -54,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
       section.style.display = hasVisiblePosts ? 'block' : 'none';
     });
   }
-  
+
   function debounce(func, wait) {
     let timeout;
     return function() {
@@ -64,3 +61,4 @@ document.addEventListener('DOMContentLoaded', function() {
     };
   }
 });
+
