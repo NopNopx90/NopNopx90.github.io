@@ -1,39 +1,20 @@
 title: NopNop0x90's Blog
-description: Security research, CTF writeups, and hacking adventures
+description: Security research and CTF writeups
 url: https://nopnopx90.github.io
 baseurl: ""
 
-# Build settings
 markdown: kramdown
 highlighter: rouge
 permalink: /:year/:month/:day/:title/
 
-# Pagination - use only one of these
-# Option 1: jekyll-paginate (simple)
-paginate: 8
+paginate: 7
 paginate_path: "/page/:num/"
 
-# Option 2: jekyll-paginate-v2 (advanced)
-# Comment this section if using Option 1
-jekyll-paginate-v2:
-  enabled: true
-  per_page: 8
-  permalink: '/page/:num/'
-  title: ':title - Page :num'
-  limit: 0
-  sort_field: 'date'
-  sort_reverse: true
-  trail:
-    before: 2
-    after: 2
-
-# Collections
 collections:
   posts:
     output: true
     permalink: /writeups/:title/
 
-# Default front matter
 defaults:
   -
     scope:
@@ -47,10 +28,9 @@ defaults:
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
-  - jekyll-paginate-v2  # Choose this or jekyll-paginate
-  # - jekyll-paginate    # Not both
+ # - jekyll-paginate-v2  
+  - jekyll-paginate    
 
-# Exclude from processing
 exclude:
   - Gemfile
   - Gemfile.lock
