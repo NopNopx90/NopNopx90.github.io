@@ -820,7 +820,7 @@ footer::before {
 /* FRANXX-specific decorative elements */
 .franxx-divider {
   position: relative;
-  height: 30px;
+  height: 40px;
   margin: 2rem 0;
   text-align: center;
 }
@@ -848,14 +848,23 @@ footer::before {
   display: flex;
 }
 
+.franxx-divider .x-blue,
+.franxx-divider .x-pink {
+  font-size: 26px; /* Added explicit font size */
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+  background: var(--bg-primary);
+  padding: 0 2px;
+  letter-spacing: -5px;
+}
+
 .franxx-divider .x-blue {
   color: #00a1e9;
-  letter-spacing: -5px;
 }
 
 .franxx-divider .x-pink {
   color: #ff4170;
-  letter-spacing: -5px;
 }
 
 .pagination {
