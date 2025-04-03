@@ -8,11 +8,13 @@ markdown: kramdown
 highlighter: rouge
 permalink: /:year/:month/:day/:title/
 
-# Pagination settings
+# Pagination - use only one of these
+# Option 1: jekyll-paginate (simple)
 paginate: 8
 paginate_path: "/page/:num/"
 
-# For archives paginate
+# Option 2: jekyll-paginate-v2 (advanced)
+# Comment this section if using Option 1
 jekyll-paginate-v2:
   enabled: true
   per_page: 8
@@ -21,6 +23,9 @@ jekyll-paginate-v2:
   limit: 0
   sort_field: 'date'
   sort_reverse: true
+  trail:
+    before: 2
+    after: 2
 
 # Collections
 collections:
@@ -42,7 +47,8 @@ defaults:
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
-  - jekyll-paginate-v2  # Add pagination plugin
+  - jekyll-paginate-v2  # Choose this or jekyll-paginate
+  # - jekyll-paginate    # Not both
 
 # Exclude from processing
 exclude:
@@ -50,4 +56,3 @@ exclude:
   - Gemfile.lock
   - vendor
   - README.md
-
